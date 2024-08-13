@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { set } from 'immutable';
 
-const Modal = ({open,setOpen})=>(
-  <div className={`overlay animated ${open ? 'show' : ''}`}>
+function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="App">
+      <button onClick={()=> setOpen(true)} className="open-modal-btn">✨ Открыть окно</button>
+      {open && ( 
+      <div className="overlay">
         <div className="modal">
           <svg onClick={()=>setOpen(false)} height="200" viewBox="0 0 200 200" width="200">
             <title />
@@ -12,15 +17,7 @@ const Modal = ({open,setOpen})=>(
           <img src="https://media2.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif" />
         </div>
       </div> 
-);
-
-function App() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="App">
-      <button onClick={()=> setOpen(true)} className="open-modal-btn">✨ Открыть окно</button>
-      <Modal open={open} setOpen={setOpen} />
+      )}
     </div>
   );
 }

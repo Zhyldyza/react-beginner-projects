@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Collection = ({images, name}) => {
+export const Collection = ({ name, images }) => {
   return (
       <div className="collection">
         <img className="collection__big" src={images[0]}  alt="Item" />

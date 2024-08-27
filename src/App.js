@@ -19,7 +19,7 @@ const [collections, setCollections]=useState([]);
 
 useEffect(()=>{
   setIsLoading(true);
-  fetch(`https://66bdbe9f74dfc195586d7348.mockapi.io/photos_collection?${categoryId ? `category=${categoryId}`: ''}`,)
+  fetch(`https://66bdbe9f74dfc195586d7348.mockapi.io/photos?${categoryId ? `category=${categoryId}`: ''}`,)
   .then((res)=>res.json())
   .then((json)=>{
     setCollections(json);
@@ -40,13 +40,15 @@ useEffect(()=>{
         <input value={searchValue} onChange={e => setSearchValue(e.target.value)} className="search-input" placeholder="Поиск по названию" />
       </div>
       <div className="content">
-       {isLoading ? (<h2>Loading..</h2>):(
-         collections.filter((obj)=>{
-          return obj.name.toLowerCase().includes(searchValue.toLowerCase());
-        }).map ((obj, index) => (
-          <Collection key={index} name={obj.name} images={obj.photos}/>
-        ))
-       )}
+        {isLoading ? (
+          <h2>Loading..</h2>
+        ) : (
+          collections
+            .filter((obj) => obj.name && obj.name.toLowerCase().includes(searchValue.toLowerCase())) // Добавляем проверку
+            .map((obj, index) => (
+              <Collection key={index} name={obj.name} images={obj.photos} />
+            ))
+        )}
       </div>
       <ul className="pagination">
         <li>1</li>
